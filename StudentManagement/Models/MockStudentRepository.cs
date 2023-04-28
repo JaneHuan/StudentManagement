@@ -11,10 +11,17 @@ namespace StudentManagement.Models
         public MockStudentRepository()
         {
             _students = new List<Student>() { 
-                new Student(){Id=1,Name="刘玄德",ClassName="三年级",Email="liubei@163.com"},
-                new Student(){Id=2,Name="关云长",ClassName="二年级",Email="guanyu@163.com"},
-                new Student(){Id=3,Name="张翼德",ClassName="一年级",Email="张飞@163.com"},
+                new Student(){Id=1,Name="张三",ClassName=ClassNameEnum.FirstGrade,Email="zhangsan@163.com"},
+                new Student(){Id=2,Name="李四",ClassName=ClassNameEnum.SecondGrade,Email="lisi@163.com"},
+                new Student(){Id=3,Name="王五",ClassName=ClassNameEnum.GradeThree,Email="王五@163.com"},
             };
+        }
+
+        public Student Add(Student student)
+        {
+            student.Id = _students.Max(s => s.Id)+1;
+            _students.Add(student);
+            return student;
         }
 
         public IEnumerable<Student> GetAllStudents()

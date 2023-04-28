@@ -21,20 +21,29 @@ namespace StudentManagement.Controllers
             var students = _studentRepository.GetAllStudents();
             return View(students);
         }
-        public IActionResult Details(int id)
+        public IActionResult Details(int? id)
         {
-            //Student model = _studentRepository.GetStudent(1);
-            //ViewData["PageTitle"] = "学生详情页面";
-            //ViewData["Student"] = model;
-            //ViewBag.PageTitle= "学生详情页面";
-            //ViewBag.Student =model;
-            //return View(model);
             HomeDetailsViewModel viewModel = new HomeDetailsViewModel() 
             { 
                 PageTitle="学生详情信息",
-                Student = _studentRepository.GetStudent(id)
+                Student = _studentRepository.GetStudent(id??1)
             };
             return View(viewModel);
+        }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(Student student)
+        {
+            if (ModelState.IsValid)
+            {
+                _studentRepository.Add(student);
+                return RedirectToAction("Details", new { id = student.Id });
+            }
+            return View();
         }
     }
 }
