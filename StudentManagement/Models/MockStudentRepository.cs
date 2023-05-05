@@ -38,7 +38,6 @@ namespace StudentManagement.Models
         {
             return _students.FirstOrDefault(s => s.Id == id);
         }
-
         public Student Update(Student uStudent)
         {
             throw new NotImplementedException();
