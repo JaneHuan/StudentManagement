@@ -15,7 +15,7 @@ namespace StudentManagement.Models
         public Student Add(Student student)
         {
             _dbContext.Students.Add(student);
-            _dbContext.SaveChangesAsync();
+            _dbContext.SaveChanges();
             return student;
         }
 

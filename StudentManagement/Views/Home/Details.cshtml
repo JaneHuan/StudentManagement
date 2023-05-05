@@ -1,6 +1,7 @@
 ﻿@model HomeDetailsViewModel
 @{
     ViewBag.Title = "学生详细信息";
+    var photoPath = "~/images/"+( Model.Student.PhotoPath?? "img1.jpg");
 }
 <div class="row justify-content-center m-3">
     <div class="col-8">
@@ -9,7 +10,7 @@
                 <h1>@Model.Student.Name</h1>
             </div>
             <div class="card-body text-center">
-                <img src="~/images//img1.jpg" width="600" height="300" />"
+                <img src="@photoPath" width="600" height="300"  asp-append-version="true"/>"
                 <h4>学生ID:@Model.Student.Id</h4>
                 <h4>邮箱:@Model.Student.Email</h4>
                 <h4>班级:@Model.Student.ClassName</h4>
