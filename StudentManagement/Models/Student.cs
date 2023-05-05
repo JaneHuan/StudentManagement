@@ -17,9 +17,10 @@ namespace StudentManagement.Models
         public ClassNameEnum? ClassName { get; set; }
 
         [Display(Name = "电子邮件")]
-        [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",
-        ErrorMessage = "邮箱的格式不正确")]
+        [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",ErrorMessage = "邮箱的格式不正确")]
         [Required(ErrorMessage = "请输入邮箱地址")]
         public string Email { get; set; }
+
+        public string PhotoPath { get; set; }
     }
 }
