@@ -15,7 +15,8 @@
         "MyKey": "appsettings.jsong -- Mykey",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "nativeDebugging": true
+      "sqlDebugging": true,
+      "nativeDebugging": false
     },
     "StudentManagement": {
       "commandName": "Project",
