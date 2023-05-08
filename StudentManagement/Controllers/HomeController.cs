@@ -27,10 +27,10 @@ namespace StudentManagement.Controllers
         }
         public IActionResult Details(int? id)
         {
-            HomeDetailsViewModel viewModel = new HomeDetailsViewModel() 
-            { 
-                PageTitle="学生详情信息",
-                Student = _studentRepository.GetStudent(id??1)
+            HomeDetailsViewModel viewModel = new HomeDetailsViewModel()
+            {
+                PageTitle = "学生详情信息",
+                Student = _studentRepository.GetStudent(id ?? 1)
             };
             return View(viewModel);
         }
@@ -54,7 +54,7 @@ namespace StudentManagement.Controllers
                     //新文件全路径
                     string newFileName = Path.Combine(uploadFile, uniqueFileName);
                     //将图片复制到新文件中
-                    using(FileStream stream=new FileStream(newFileName, FileMode.Create))
+                    using (FileStream stream = new FileStream(newFileName, FileMode.Create))
                     {
                         model.Photo.CopyTo(stream);
                     }
@@ -72,6 +72,21 @@ namespace StudentManagement.Controllers
 
             }
             return View();
+        }
+        [HttpGet]
+        public ViewResult Edit(int id)
+        {
+            var student = _studentRepository.GetStudent(id);
+            StudentEditViewModel viewModel = new StudentEditViewModel()
+            {
+                Id = student.Id,
+                Name = student.Name,
+                ClassName=student.ClassName,
+                Email=student.Email,
+                ExistPhotoPath=student.PhotoPath
+            };
+
+            return View(viewModel);
         }
     }
 }
