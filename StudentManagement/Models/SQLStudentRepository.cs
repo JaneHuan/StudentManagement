@@ -24,6 +24,7 @@ namespace StudentManagement.Models
             var student=_dbContext.Students.Find(id);
             if (student != null)
                 _dbContext.Students.Remove(student);
+            _dbContext.SaveChanges();
             return student;
         }
 

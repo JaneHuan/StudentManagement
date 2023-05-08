@@ -25,12 +25,18 @@ namespace StudentManagement.Controllers
             var students = _studentRepository.GetAllStudents();
             return View(students);
         }
-        public IActionResult Details(int? id)
+        public ViewResult Details(int id)
         {
+            var student = _studentRepository.GetStudent(id);
+            if (student == null)
+            {
+                Response.StatusCode = 404;
+                return View("NotFound",id);
+            }
             HomeDetailsViewModel viewModel = new HomeDetailsViewModel()
             {
                 PageTitle = "学生详情信息",
-                Student = _studentRepository.GetStudent(id ?? 1)
+                Student = student
             };
             return View(viewModel);
         }
@@ -77,6 +83,11 @@ namespace StudentManagement.Controllers
         public ViewResult Edit(int id)
         {
             var student = _studentRepository.GetStudent(id);
+            if (student == null)
+            {
+                Response.StatusCode = 404;
+                return View("NotFound",id);
+            }
             StudentEditViewModel viewModel = new StudentEditViewModel()
             {
                 Id = student.Id,
@@ -94,7 +105,11 @@ namespace StudentManagement.Controllers
             if (ModelState.IsValid)
             {
                 var student = _studentRepository.GetStudent(model.Id);
-                if (student == null) return View();
+                if (student == null)
+                {
+                    Response.StatusCode = 404;
+                    return View("NotFound",model.Id);
+                }
                 if (model.Photo != null&& student.PhotoPath!=null)
                 {
                     student.Name = model.Name;
@@ -109,6 +124,12 @@ namespace StudentManagement.Controllers
                 return RedirectToAction("index");
             }
             return View();
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var student = _studentRepository.Delete(id);
+            return RedirectToAction("index");
         }
 
         private string SavePhoto(Microsoft.AspNetCore.Http.IFormFile file)

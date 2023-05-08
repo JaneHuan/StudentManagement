@@ -50,6 +50,7 @@ namespace StudentManagement
             else
             {
                 app.UseExceptionHandler("/Error");
+                app.UseStatusCodePagesWithReExecute("/Error/{0}"); //拦截404找不到的页面信息
             }
             //添加读取静态文件中间件
             app.UseStaticFiles();

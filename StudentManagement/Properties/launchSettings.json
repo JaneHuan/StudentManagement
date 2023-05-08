@@ -13,7 +13,8 @@
       "launchBrowser": true,
       "environmentVariables": {
         "MyKey": "appsettings.jsong -- Mykey",
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        //"ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_ENVIRONMENT": "Product"
       },
       "sqlDebugging": true,
       "nativeDebugging": false
