@@ -29,10 +29,7 @@ namespace StudentManagement.Controllers
         {
             var student = _studentRepository.GetStudent(id);
             if (student == null)
-            {
-                Response.StatusCode = 404;
-                return View("NotFound",id);
-            }
+                throw new Exception($"没有查询到Id为{id}的学生信息");
             HomeDetailsViewModel viewModel = new HomeDetailsViewModel()
             {
                 PageTitle = "学生详情信息",
@@ -83,11 +80,6 @@ namespace StudentManagement.Controllers
         public ViewResult Edit(int id)
         {
             var student = _studentRepository.GetStudent(id);
-            if (student == null)
-            {
-                Response.StatusCode = 404;
-                return View("NotFound",id);
-            }
             StudentEditViewModel viewModel = new StudentEditViewModel()
             {
                 Id = student.Id,
@@ -105,11 +97,6 @@ namespace StudentManagement.Controllers
             if (ModelState.IsValid)
             {
                 var student = _studentRepository.GetStudent(model.Id);
-                if (student == null)
-                {
-                    Response.StatusCode = 404;
-                    return View("NotFound",model.Id);
-                }
                 if (model.Photo != null&& student.PhotoPath!=null)
                 {
                     student.Name = model.Name;
