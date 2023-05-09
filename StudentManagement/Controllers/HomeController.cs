@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting.Internal;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using StudentManagement.Models;
 using StudentManagement.ViewModels;
@@ -13,9 +13,9 @@ namespace StudentManagement.Controllers
     public class HomeController : Controller
     {
         private IStudentRepository _studentRepository;
-        private HostingEnvironment _hostingEnvironment;
+        private IWebHostEnvironment _hostingEnvironment;
 
-        public HomeController(IStudentRepository studentRepository, HostingEnvironment hostingEnvironment)
+        public HomeController(IStudentRepository studentRepository, IWebHostEnvironment hostingEnvironment)
         {
             _studentRepository = studentRepository;
             _hostingEnvironment = hostingEnvironment;
